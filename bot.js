@@ -7,7 +7,7 @@ const bot = new TelegramBot(token, {polling: true});
 // Matches /audio
 bot.onText(/\/audio/, function onAudioText(msg) {
   // From HTTP request
-  const url = 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Example.ogg';
+  const url = 'https://youtu.be/M8sOXu-0VYE';
   const audio = request(url);
   bot.sendAudio(msg.chat.id, audio);
 });
@@ -39,16 +39,16 @@ bot.onText(/\/editable/, function onEditableText(msg) {
       inline_keyboard: [
         [
           {
-            text: 'Edit Text',
+            text: '/start',
             // we shall check for this value when we listen
             // for "callback_query"
-            callback_data: 'edit'
+            callback_data: 'start'
           }
         ]
       ]
     }
   };
-  bot.sendMessage(msg.from.id, 'Original Text', opts);
+  bot.sendMessage(msg.from.id, '😳😳', opts);
 });
 
 // Handle callback queries
@@ -61,8 +61,8 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   };
   let text;
 
-  if (action === 'edit') {
-    text = 'Edited Text';
+  if (action === 'start') {
+    text = '/start';
   }
 
   bot.editMessageText(text, opts);
