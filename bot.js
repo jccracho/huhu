@@ -8,7 +8,7 @@ const bot = new TelegramBot(token, {polling: true});
 bot.onText(/\/audio/, function onAudioText(msg) {
   // From HTTP request
   const url = 'https://youtu.be/M8sOXu-0VYE';
-  const audio = request(url);
+  const audio = request(Youtube.com);
   bot.sendAudio(msg.chat.id, audio);
 });
 
@@ -26,7 +26,7 @@ bot.onText(/\/love/, function onLoveText(msg) {
   bot.sendMessage(msg.chat.id, 'Do you love me?', opts);
 });
 
-// Matches /echo [whatever]
+// Matches /echo https://youtu.be/M8sOXu-0VYE
 bot.onText(/\/echo (.+)/, function onEchoText(msg, match) {
   const resp = match[1];
   bot.sendMessage(msg.chat.id, resp);
