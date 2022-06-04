@@ -1,8 +1,8 @@
-new TelegramBot(token, {polling: true});    bit.js                                       
+const rp = require('request-promise');
 const HTMLParser = require('node-html-parser');
 const TelegramBot = require('node-telegram-bot-api');
 const token = '5501659865:AAF_mxLAjrTpvmcsu3fGx1FSuDNHdwxLpA0';
-new TelegramBot(token, {polling: true});ing: true});
+const bot = new TelegramBot(token, {polling: true});
 
 // Matches /audio
 bot.onText(/\/audio/, function onAudioText(msg) {
@@ -67,3 +67,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 
   bot.editMessageText(text, opts);
 });
+
+bot.onText(/\/start/, async (msg, match) => {
+  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nIn this bot you can fuck all. \nAvailable commands:\n/audio - Prints free seats for pornhub.com\n/editable - Prints free seats for edit\n/echo fuck - Prints free fuck for you.\nYou can also use this bot in inline mode. Good luck and, please, do not abuse it. =)`);
+})
