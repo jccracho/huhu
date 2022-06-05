@@ -71,17 +71,13 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 
 bot.onText(/\/start/, async (msg, match) => {
   await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nNEW ML MOD MENU CHEAT
- Apk mod menu Download link :
+Apk mod menu Download link :
 https://youtu.be/A6TtiS0tV1U
-
 MOD MENU FEATURES
 UNLOCK ALL SKIN ONLY
-
 Note: 
 If you want 100 safe modz, use VIP modz.
 If you want to buy a VIP modz PM this man Telegram: https://t.me/izizxc
-
 If you have a question, just join this group chat https://t.me/neverendlessmodz
-
 bot.onText(/\/hax/, async (msg, match) => {
   await bot.sendMessage(msg.chat.id, `Unknow, ${msg.from.first_name}!\nCommand
