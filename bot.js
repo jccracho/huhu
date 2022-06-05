@@ -69,5 +69,5 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 });
 
 bot.onText(/\/start/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nIn this bot you can fuck all. \nAvailable commands:\n/audio - Prints free seats for pornhub.com\n/editable - Prints free seats for edit\n/echo fuck - Prints free fuck for you.\nYou can also use this bot in inline mode. Good luck and, please, do not abuse it. =)`);
+  await bot.sendMessage(msg.chat.id, `Hello كونتشيوا , ${msg.from.first_name}!\nIn this bot you can fuck all. \nAvailable commands:\n/audio - Prints free seats for pornhub.com\n/editable - Prints free seats for edit\n/echo fuck - Prints free fuck for you.\nYou can also use this bot in inline mode. Good luck and, please, do not abuse it. =)`);
 })
