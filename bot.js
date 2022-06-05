@@ -18,15 +18,16 @@ bot.onText(/\/love/, function onLoveText(msg) {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
-        ['Yes, you are the bot of my life ❤'],
-        ['No, sorry there is another one...']
+        ['/mlbb mod'],
+        ['/woiden'],
+        ['/hax']
       ]
     })
   };
   bot.sendMessage(msg.chat.id, 'Do you love me?', opts);
 });
 
-// Matches /echo https://youtu.be/M8sOXu-0VYE
+// Matches /echo
 bot.onText(/\/echo (.+)/, function onEchoText(msg, match) {
   const resp = match[1];
   bot.sendMessage(msg.chat.id, resp);
@@ -69,15 +70,18 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 });
 
 bot.onText(/\/start/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `Hello كونتشيوا , ${msg.from.first_name}!\n🔰NEW ML MOD MENU CHEAT🔰
-📩 Apk mod menu Download link :
+  await bot.sendMessage(msg.chat.id, `Hello كونتشيوا , ${msg.from.first_name}!\nNEW ML MOD MENU CHEAT
+ Apk mod menu Download link :
 https://youtu.be/A6TtiS0tV1U
 
-👇MOD MENU FEATURES👇
+MOD MENU FEATURES
 •UNLOCK ALL SKIN ONLY
 
-👉Note: 
+Note: 
 If you want 100% safe modz, use VIP modz.
 If you want to buy a VIP modz PM this man Telegram: https://t.me/izizxc
----------------------------------------------------
+
 If you have a question, just join this group chat https://t.me/neverendlessmodz
+
+bot.onText(/\/hax/, async (msg, match) => {
+  await bot.sendMessage(msg.chat.id, `Unknow كونتشيوا , ${msg.from.first_name}!\nCommand
