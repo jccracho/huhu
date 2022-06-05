@@ -49,7 +49,21 @@ bot.onText(/\/help/, function onEditableText(msg) {
       ]
     }
   };
-  bot.sendMessage(msg.from.id, 'Pin
+  bot.sendMessage(msg.from.id, 'pin', opts);
+});
+
+// Handle callback queries
+bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+  const action = callbackQuery.data;
+  const msg = callbackQuery.message;
+  const opts = {
+    chat_id: msg.chat.id,
+    message_id: msg.message_id,
+  };
+  let text;
+
+  if (action === 'start') {
+    text = 'Pin
 
 All the pin related commands can be found here; keep your chat up to date on the latest news with a simple pinned message!
 
@@ -64,21 +78,7 @@ Admin commands:
 - /antichannelpin <yes/no/on/off>: Don't let telegram auto-pin linked channels. If no arguments are given, shows current setting.
 - /cleanlinked <yes/no/on/off>: Delete messages sent by the linked channel.
 
-Note: When using antichannel pins, make sure to use the /unpin command, instead of doing it manually. Otherwise, the old message will get re-pinned when the channel sends any messages.', opts);
-});
-
-// Handle callback queries
-bot.on('callback_query', function onCallbackQuery(callbackQuery) {
-  const action = callbackQuery.data;
-  const msg = callbackQuery.message;
-  const opts = {
-    chat_id: msg.chat.id,
-    message_id: msg.message_id,
-  };
-  let text;
-
-  if (action === 'start') {
-    text = '/start';
+Note: When using antichannel pins, make sure to use the /unpin command, instead of doing it manually. Otherwise, the old message will get re-pinned when the channel sends any messages.';
   }
 
   bot.editMessageText(text, opts);
