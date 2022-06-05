@@ -70,16 +70,9 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 });
 
 bot.onText(/\/start/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nNEW ML MOD MENU CHEAT
-Apk mod menu Download link :
-https://youtu.be/A6TtiS0tV1U
-MOD MENU FEATURES
-UNLOCK ALL SKIN ONLY
-Note: 
-If you want 100 safe modz, use VIP modz.
-If you want to buy a VIP modz PM this man Telegram: https://t.me/izizxc
-If you have a question, just join this group chat https://t.me/neverendlessmodz
+  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nIn this bot you can check free seats for woiden.id and hax.co.id sites. \nAvailable commands:\n/hax - Prints free seats for hax.co.id\n/woiden - Prints free seats for woiden.id\n/both - Prints free seats for both.\nYou can also use this bot in inline mode. Good luck and, please, do not abuse it. =)`);
 })
 
 bot.onText(/\/hax/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `Unknow, ${msg.from.first_name}!\nCommand
+  await bot.sendMessage(msg.chat.id, `Unknow, ${msg.from.first_name}!\nCommand`);
+})
