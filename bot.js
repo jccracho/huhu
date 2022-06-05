@@ -43,13 +43,13 @@ bot.onText(/\/help/, function onEditableText(msg) {
             text: '/start',
             // we shall check for this value when we listen
             // for "callback_query"
-            callback_data: 'start'
+            callback_data: 'test'
           }
         ]
       ]
     }
   };
-  bot.sendMessage(msg.from.id, 'pin', opts);
+  bot.sendMessage(msg.from.id, 'help', opts);
 });
 
 // Handle callback queries
@@ -92,7 +92,7 @@ bot.onText(/\/woiden/, async (msg, match) => {
   await bot.sendMessage(msg.chat.id, `⚠️, ${msg.from.first_name}!\nUnknown Command`);
 })
 
-bot.onText(/\//, async (msg, match) => {
+bot.onText(/\/both/, async (msg, match) => {
   await bot.sendMessage(msg.chat.id, `⚠️, ${msg.from.first_name}!\nUnknown Command`);
 })
 
