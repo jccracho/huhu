@@ -79,5 +79,7 @@ Note:
 If you want 100 safe modz, use VIP modz.
 If you want to buy a VIP modz PM this man Telegram: https://t.me/izizxc
 If you have a question, just join this group chat https://t.me/neverendlessmodz
+})
+
 bot.onText(/\/hax/, async (msg, match) => {
   await bot.sendMessage(msg.chat.id, `Unknow, ${msg.from.first_name}!\nCommand
