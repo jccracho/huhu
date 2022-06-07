@@ -1,98 +1,79 @@
 const rp = require('request-promise');
 const HTMLParser = require('node-html-parser');
 const TelegramBot = require('node-telegram-bot-api');
-const token = '5501659865:AAF_mxLAjrTpvmcsu3fGx1FSuDNHdwxLpA0';
+const token = '5437197833:AAHeDR1s5SxNtA-a46h1a8BKQ5k5OZeOy8w';
 const bot = new TelegramBot(token, {polling: true});
 
-// Matches /audio
-bot.onText(/\/audio/, function onAudioText(msg) {
-  // From HTTP request
-  const url = 'https://youtu.be/M8sOXu-0VYE';
-  const audio = request(Youtube.com);
-  bot.sendAudio(msg.chat.id, audio);
-});
-
-// Matches /love
-bot.onText(/\/love/, function onLoveText(msg) {
-  const opts = {
-    reply_to_message_id: msg.message_id,
-    reply_markup: JSON.stringify({
-      keyboard: [
-        ['/mlbb mod'],
-        ['/woiden'],
-        ['/hax']
-      ]
-    })
-  };
-  bot.sendMessage(msg.chat.id, 'Do you love me?', opts);
-});
-
-// Matches /echo
-bot.onText(/\/echo (.+)/, function onEchoText(msg, match) {
-  const resp = match[1];
-  bot.sendMessage(msg.chat.id, resp);
-});
-
-// Matches /help
-bot.onText(/\/help/, function onEditableText(msg) {
-  const opts = {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: '/start',
-            // we shall check for this value when we listen
-            // for "callback_query"
-            callback_data: 'test'
-          }
-        ]
-      ]
-    }
-  };
-  bot.sendMessage(msg.from.id, 'help', opts);
-});
-
-// Handle callback queries
-bot.on('callback_query', function onCallbackQuery(callbackQuery) {
-  const action = callbackQuery.data;
-  const msg = callbackQuery.message;
-  const opts = {
-    chat_id: msg.chat.id,
-    message_id: msg.message_id,
-  };
-  let text;
-
-  if (action === 'start') {
-    text = 'start';
+async function grabHax(msg) {
+  let html = await rp("https://hax.co.id/create-vps/");
+  const root = HTMLParser.parse(html);
+  let text = "";
+  let nodes;
+  try{
+     nodes = root.getElementById("datacenter").querySelectorAll("option");
+  } catch (err) {
+    return "hax.co.id: could not connect\n";
   }
-
-  bot.editMessageText(text, opts);
-});
-
-bot.onText(/\/mlmod/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\n🔰NEW ML MOD MENU CHEAT🔰
-📩 Apk mod menu Download link :
-https://youtu.be/A6TtiS0tV1U
-
-👇MOD MENU FEATURES👇
-•UNLOCK ALL SKIN ONLY
-
-👉Note: 
-If you want 100% safe modz, use VIP modz.
-If you want to buy a VIP modz PM this man Telegram: https://t.me/izizxc
----------------------------------------------------
-If you have a question, just join this group chat https://t.me/neverendlessmodz`);
-})
+  for (let i = 1; i < nodes.length; i++) {
+      text+=nodes[i].text+"\n";
+  }
+  if (text == "") return "hax.co.id: full\n";
+  else return "hax.co.id: \n" + text+"\n";
+}
+async function grabWoiden(msg) {
+  let html = await rp("https://woiden.id/create-vps/");
+  const root = HTMLParser.parse(html);
+  let text = "";
+  let nodes;
+  try{
+     nodes = root.getElementById("datacenter").querySelectorAll("option");
+  } catch (err) {
+    return "woiden.id: could not connect\n";
+  }
+  for (let i = 1; i < nodes.length; i++) {
+      text+=nodes[i].text+"\n";
+  }
+  if (text == "") return "woiden.id: full\n";
+  else return "woiden.id: \n" + text+"\n";
+}
 
 bot.onText(/\/hax/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `⚠️, ${msg.from.first_name}!\nUnknown Command`);
+  await bot.sendMessage(msg.chat.id, (await grabHax(msg)));
+})
+
+bot.onText(/\/start/, async (msg, match) => {
+  await bot.sendMessage(msg.chat.id, `Hello, ${msg.from.first_name}!\nIn this bot you can check free seats for woiden.id and hax.co.id sites. \nAvailable commands:\n/hax - Prints free seats for hax.co.id\n/woiden - Prints free seats for woiden.id\n/both - Prints free seats for both.\nYou can also use this bot in inline mode. Good luck and, please, do not abuse it. =)`);
 })
 
 bot.onText(/\/woiden/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `⚠️, ${msg.from.first_name}!\nUnknown Command`);
+  await bot.sendMessage(msg.chat.id, (await grabWoiden(msg)));
 })
-
 bot.onText(/\/both/, async (msg, match) => {
-  await bot.sendMessage(msg.chat.id, `⚠️, ${msg.from.first_name}!\nUnknown Command`);
+  await bot.sendMessage(msg.chat.id, (await grabHax(msg))+"\n"+(await grabWoiden(msg)));
 })
-
+bot.on("inline_query", async (query) => {
+  if (query.query != "") return;
+  let hax = await grabHax();
+  let woiden = await grabWoiden();
+  await bot.answerInlineQuery(query.id, [{
+    id: '0',
+    type: 'article',
+    title: 'Hax.co.id seats',
+    description: hax,
+    message_text: hax
+},
+{
+  id: '1',
+  type: 'article',
+  title: 'Woiden.id seats',
+  description: woiden,
+  message_text: woiden
+},
+{
+  id: '2',
+  type: 'article',
+  title: 'Both seats',
+  description: hax+"\n"+woiden,
+  message_text: hax+"\n"+woiden
+}])
+});
