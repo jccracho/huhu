@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const HTMLParser = require('node-html-parser');
 const TelegramBot = require('node-telegram-bot-api');
-const token = '5437197833:AAHeDR1s5SxNtA-a46h1a8BKQ5k5OZeOy8w';
+const token = '5501659865:AAF_mxLAjrTpvmcsu3fGx1FSuDNHdwxLpA0';
 const bot = new TelegramBot(token, {polling: true});
 
 async function grabHax(msg) {
